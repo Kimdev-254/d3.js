@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>D3.js Tutorial</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+  </head>
+  <body>
+    <h1>Learn D3.js</h1>
+    <div id="chart"></div>
+  </body>
+</html>
+<script>
+  // Select the chart container
+  const svg = d3
+    .select("#chart")
+    .append("svg") // Append SVG element
+    .attr("width", 500) // Set width
+    .attr("height", 300) // Set height
+
+  // Append a rectangle to the SVG
+  svg
+    .append("rect")
+    .attr("x", 50) // X-coordinate
+    .attr("y", 50) // Y-coordinate
+    .attr("width", 200) // Width of the rectangle
+    .attr("height", 100) // Height of the rectangle
+    .attr("fill", "blue") // Fill color
+</script>
