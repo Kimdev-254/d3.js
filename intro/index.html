@@ -13,7 +13,7 @@
 </html>
 
 <script>
-  const data = [30, 70, 110, 150] // Data representing circle positions
+  const data = [10, 25, 40, 60, 80]
 
   const svg = d3
     .select("#chart")
@@ -21,14 +21,26 @@
     .attr("width", 500)
     .attr("height", 200)
 
-  // Bind data and create circles
+  const scaleX = d3
+    .scaleBand() // Map data to bar positions
+    .domain(data.map((d, i) => i)) // Indices as keys
+    .range([0, 500]) // SVG width
+    .padding(0.1) // Space between bars
+
+  const scaleY = d3
+    .scaleLinear() // Scale for bar heights
+    .domain([0, d3.max(data)]) // Min & Max values
+    .range([200, 0]) // Height range (reversed)
+
+  // Draw bars
   svg
-    .selectAll("circle") // Select circles (none exist yet)
-    .data(data) // Bind data to virtual circles
-    .enter() // Enter the data
-    .append("circle") // Append a circle for each data point
-    .attr("cx", (d) => d) // X-coordinate based on data
-    .attr("cy", 100) // Fixed Y-coordinate
-    .attr("r", 20) // Radius
-    .attr("fill", "orange") // Fill color
+    .selectAll("rect")
+    .data(data)
+    .enter()
+    .append("rect")
+    .attr("x", (d, i) => scaleX(i)) // Use X scale
+    .attr("y", (d) => scaleY(d)) // Use Y scale
+    .attr("width", scaleX.bandwidth()) // Dynamic width
+    .attr("height", (d) => 200 - scaleY(d)) // Height of bar
+    .attr("fill", "steelblue")
 </script>
