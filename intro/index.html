@@ -43,4 +43,26 @@
     .attr("width", scaleX.bandwidth()) // Dynamic width
     .attr("height", (d) => 200 - scaleY(d)) // Height of bar
     .attr("fill", "steelblue")
+
+  // Append X Axis
+  svg
+    .append("g")
+    .attr("transform", "translate(0,200)") // Move axis to bottom
+    .call(d3.axisBottom(scaleX)) // Create bottom axis
+
+  // Append Y Axis
+  svg
+    .append("g")
+    .attr("transform", "translate(0,0)") // Move to left
+    .call(d3.axisLeft(scaleY)) // Create left axis
+
+  // Add interaction
+  svg
+    .selectAll("rect")
+    .on("mouseover", function () {
+      d3.select(this).attr("fill", "orange") // Change color on hover
+    })
+    .on("mouseout", function () {
+      d3.select(this).attr("fill", "steelblue") // Reset color
+    })
 </script>
